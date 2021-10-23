@@ -2,7 +2,7 @@ class Api::V1::VenuesController < Api::V1::BaseController
   before_action :authenticate_rest, only: %i[add_shift add_table] #TODO: add reservation method here too
 
   def create
-    venue = Venue.new(optimized_params(params_of(:venue)))
+    venue = Venue.new(optimized_params(:venue))
     if venue.save
       render json: { success: true, status: 200, message: 'Venue created successfully' }
     else
@@ -11,7 +11,7 @@ class Api::V1::VenuesController < Api::V1::BaseController
   end
 
   def add_shift
-    shift = @venue.shifts.build(optimized_params(params_of(:shift)))
+    shift = @venue.shifts.build(optimized_params(:shift))
     if shift.save
       render json: { success: true, status: 200, message: 'Shift created successfully' }
     else
@@ -20,7 +20,7 @@ class Api::V1::VenuesController < Api::V1::BaseController
   end
 
   def add_table
-    table = @venue.tables.build(optimized_params(params_of(:table)))
+    table = @venue.tables.build(optimized_params(:table))
     if table.save
       render json: { success: true, status: 200, message: 'Table created successfully' }
     else
@@ -40,7 +40,7 @@ class Api::V1::VenuesController < Api::V1::BaseController
   end
 
   def optimized_params(type)
-    params.require(type).permit(*self.send("#{type}_attributes"))
+    params.require(type).permit(*self.send("params_of(#{type})"))
   end
 
   def params_of(type)

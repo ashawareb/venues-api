@@ -4,7 +4,7 @@ class Api::V1::ReservationsController < Api::V1::BaseController
 
   def create
     @venue = Venue.by_reservation(reservation_params[:table_id], reservation_params[:shift_id])
-    @reservation = venue&.reservations.build(reservation_params.merge(user_id: current_user.id))
+    @reservation = venue&.reservations&.build(reservation_params&.merge(user_id: current_user.id))
     if @reservation.save
       render json: @reservation, serializer: ReservationSerializer, status: 200
     else
