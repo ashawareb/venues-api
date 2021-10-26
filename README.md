@@ -1,24 +1,17 @@
-# README
+# Venues API
+#### venues-api is a simple reservations api that allow users to create reservations in deifferent venues and a lot of other functionalities.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Technologies used:
+- Ruby on Rails 
+- Postgresql
+- RSpec
 
-Things you may want to cover:
+## Install dependencies
+```
+$ bundle install
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Run migration
+```
+$ rails db:migrate
+```
